@@ -8,19 +8,19 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - CameraConfiner
+  - Climbing
+  - Hittable
+  - Weapon
+  - Platforms
+  - SpawnPoint
+  - Pickable
+  - Enemies
+  - AgentCollider
   - 
   - 
   - 

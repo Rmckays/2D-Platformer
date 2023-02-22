@@ -16,4 +16,65 @@ public class PlayerInput : MonoBehaviour
     public KeyCode jumpKey, attackKey, menuKey;
 
     public UnityEvent OnMenuKeyPressed;
+
+    private void Update()
+    {
+        if (Time.timeScale > 0)
+        {
+            GetMovementInput();
+            GetJumpInput();
+            GetAttackInput();
+            GetWeaponSwapInput();
+        }
+        
+        GetMenuInput();
+    }
+
+    private void GetMenuInput()
+    {
+        if (Input.GetKeyDown(menuKey))
+        {
+            OnMenuKeyPressed?.Invoke();
+        }
+    }
+
+    private void GetWeaponSwapInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnWeaponChange?.Invoke();
+        }
+    }
+
+    private void GetAttackInput()
+    {
+        if (Input.GetKeyDown(attackKey))
+        {
+            OnAttack?.Invoke();
+        }
+    }
+
+    private void GetJumpInput()
+    {
+        if (Input.GetKeyDown(jumpKey))
+        {
+            OnJumpPressed?.Invoke();
+        }
+
+        if (Input.GetKeyUp(jumpKey))
+        {
+            OnJumpReleased?.Invoke();
+        }
+    }
+
+    private void GetMovementInput()
+    {
+        MovementVector = GetMovementVector();
+        OnMovement?.Invoke(MovementVector);
+    }
+
+    protected Vector2 GetMovementVector()
+    {
+        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
 }
