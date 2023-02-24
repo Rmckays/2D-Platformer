@@ -8,17 +8,20 @@ public class Agent : MonoBehaviour
     public Rigidbody2D rigidBody2D;
     public PlayerInput playerInput;
     public AgentAnimation agentAnimation;
+    public AgentRenderer agentRenderer;
 
     private void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         playerInput = GetComponentInParent<PlayerInput>();
         agentAnimation = GetComponentInChildren<AgentAnimation>();
+        agentRenderer = GetComponentInChildren<AgentRenderer>();
     }
 
     private void Start()
     {
         playerInput.OnMovement += HandleMovement;
+        playerInput.OnMovement += agentRenderer.FaceDirection;
     }
 
     private void HandleMovement(Vector2 input)
