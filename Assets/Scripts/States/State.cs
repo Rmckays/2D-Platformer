@@ -1,64 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class State : MonoBehaviour
+namespace States
 {
-    protected Agent agent;
-
-    public UnityEvent OnEnter, OnExit;
-
-    public void InitializeState(Agent agent)
+    public abstract class State : MonoBehaviour
     {
-        this.agent = agent;
-    }
+        protected Agent agent;
 
-    public void Enter()
-    {
-        this.agent.agentInput.OnAttack += HandleAttack;
-        this.agent.agentInput.OnJumpPressed += HandleJumpPressed;
-        this.agent.agentInput.OnJumpReleased += HandleJumpReleased;
-        this.agent.agentInput.OnMovement += HandleMovement;
-        OnEnter?.Invoke();
-        EnterStateMethod();
-    }
+        public UnityEvent OnEnter, OnExit;
 
-    protected virtual void EnterStateMethod()
-    {
-    }
+        public void InitializeState(Agent agent)
+        {
+            this.agent = agent;
+        }
 
-    protected virtual void HandleMovement(Vector2 obj)
-    {
-    }
+        public void Enter()
+        {
+            this.agent.agentInput.OnAttack += HandleAttack;
+            this.agent.agentInput.OnJumpPressed += HandleJumpPressed;
+            this.agent.agentInput.OnJumpReleased += HandleJumpReleased;
+            this.agent.agentInput.OnMovement += HandleMovement;
+            OnEnter?.Invoke();
+            EnterState();
+        }
 
-    protected virtual void HandleJumpReleased()
-    {
-    }
+        protected virtual void EnterState()
+        {
+        }
 
-    protected virtual void HandleJumpPressed()
-    {
-    }
+        protected virtual void HandleMovement(Vector2 obj)
+        {
+        }
 
-    protected virtual void HandleAttack()
-    {
-    }
+        protected virtual void HandleJumpReleased()
+        {
+        }
+
+        protected virtual void HandleJumpPressed()
+        {
+        }
+
+        protected virtual void HandleAttack()
+        {
+        }
     
-    public virtual void StateUpdate(){}
+        public virtual void StateUpdate(){}
     
-    public virtual void StateFixedUpdate(){}
+        public virtual void StateFixedUpdate(){}
 
-    public void Exit()
-    {
-        this.agent.agentInput.OnAttack -= HandleAttack;
-        this.agent.agentInput.OnJumpPressed -= HandleJumpPressed;
-        this.agent.agentInput.OnJumpReleased -= HandleJumpReleased;
-        this.agent.agentInput.OnMovement -= HandleMovement;
-        OnExit?.Invoke();
-        ExitStateMethod();
-    }
+        public void Exit()
+        {
+            this.agent.agentInput.OnAttack -= HandleAttack;
+            this.agent.agentInput.OnJumpPressed -= HandleJumpPressed;
+            this.agent.agentInput.OnJumpReleased -= HandleJumpReleased;
+            this.agent.agentInput.OnMovement -= HandleMovement;
+            OnExit?.Invoke();
+            ExitState();
+        }
 
-    protected virtual void ExitStateMethod()
-    {
+        protected virtual void ExitState()
+        {
+        }
     }
 }

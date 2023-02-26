@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentAnimation : MonoBehaviour
+public class AnimationManager : MonoBehaviour
 {
-    private Animator animator;
+    private Animator _animator;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     public void PlayAnimation(AnimationType animationType)
@@ -43,7 +43,7 @@ public class AgentAnimation : MonoBehaviour
 
     public void Play(string name)
     {
-        animator.Play(name, -1, 0f);
+        _animator.Play(name, -1, 0f);
     }
 }
 
