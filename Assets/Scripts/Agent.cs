@@ -8,9 +8,15 @@ using UnityEngine.Serialization;
 public class Agent : MonoBehaviour
 {
     public Rigidbody2D rigidBody2D;
-    [FormerlySerializedAs("playerInput")] public PlayerInput agentInput;
-    [FormerlySerializedAs("agentAnimation")] public AnimationManager animationManager;
+    public PlayerInput agentInput;
+    public AnimationManager animationManager;
     public AgentRenderer agentRenderer;
+    public State currentState = null;
+    public State previousState = null;
+    public State idleState;
+
+    [Header("State Debugging")]
+    public string stateName = "";
 
     private void Awake()
     {
@@ -18,36 +24,50 @@ public class Agent : MonoBehaviour
         agentInput = GetComponentInParent<PlayerInput>();
         animationManager = GetComponentInChildren<AnimationManager>();
         agentRenderer = GetComponentInChildren<AgentRenderer>();
+        State[] states = GetComponentsInChildren<State>();
+        foreach (var state in states)
+        {
+            Debug.Log(state.name);
+            state.InitializeState(this);
+        }
     }
 
     private void Start()
     {
-        agentInput.OnMovement += HandleMovement;
         agentInput.OnMovement += agentRenderer.FaceDirection;
+        TransitionToState(idleState);
     }
 
-    private void HandleMovement(Vector2 input)
+    public void TransitionToState(State desiredState)
     {
-        if (Math.Abs(input.x) > 0)
+        if (desiredState == null) return;
+        if (currentState != null)
         {
-            if (Math.Abs(rigidBody2D.velocity.x) < 0.01f)
-            {
-                animationManager.PlayAnimation(AnimationType.run);
-            }
-            rigidBody2D.velocity = new Vector2(input.x * 5, rigidBody2D.velocity.y);
+            currentState.Exit();
         }
-        else
+
+        previousState = currentState;
+        currentState = desiredState;
+        currentState.Enter();
+
+        DisplayState();
+    }
+
+    private void DisplayState()
+    {
+        if (previousState == null || previousState.GetType() != currentState.GetType())
         {
-            if (Math.Abs(rigidBody2D.velocity.x) > 0)
-            {
-                animationManager.PlayAnimation(AnimationType.idle);
-            }
-            rigidBody2D.velocity = new Vector2(0, rigidBody2D.velocity.y);
+            stateName = currentState.GetType().ToString();
         }
     }
 
-    public void TransitionToState(State desiredState, State currentState)
+    private void Update()
     {
-        throw new NotImplementedException();
+        currentState.StateUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.StateFixedUpdate();
     }
 }

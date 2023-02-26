@@ -32,7 +32,7 @@ namespace States
             SetPlayerVelocity();
             if (Math.Abs(agent.rigidBody2D.velocity.x) < 0.01f)
             {
-                agent.TransitionToState(IdleState, this);
+                agent.TransitionToState(IdleState);
             }
         }
 

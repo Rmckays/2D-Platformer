@@ -16,7 +16,7 @@ namespace States
         {
             if (Math.Abs(input.x) > 0)
             {
-                agent.TransitionToState(moveState, this);
+                agent.TransitionToState(moveState);
             }
         }
     }
