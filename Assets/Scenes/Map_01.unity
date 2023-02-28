@@ -2256,6 +2256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890472610}
   - component: {fileID: 1890472611}
+  - component: {fileID: 1890472612}
   m_Layer: 15
   m_Name: GroundCollider
   m_TagString: Untagged
@@ -2294,6 +2295,29 @@ CapsuleCollider2D:
   m_Offset: {x: -0.05722305, y: -0.052318454}
   m_Size: {x: 0.71908313, y: 1.1831143}
   m_Direction: 0
+--- !u!114 &1890472612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890472609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a55b73612d2348a5a501798888b0940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentCollider: {fileID: 1890472611}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 2112
+  isGrounded: 0
+  boxCastYOffset: -0.48
+  boxCastXOffset: -0
+  boxCastWidth: 0.5
+  boxCastHeight: 0.25
+  gizmoColorNotGrounded: {r: 1, g: 0, b: 0, a: 1}
+  gizmoColorIsGrounded: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &1892781637
 GameObject:
   m_ObjectHideFlags: 0
