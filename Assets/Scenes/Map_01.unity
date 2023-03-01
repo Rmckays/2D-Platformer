@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 261678879}
   - component: {fileID: 261678880}
   - component: {fileID: 261678881}
+  - component: {fileID: 261678882}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -168,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3c6964103654696911e415c364b1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpState: {fileID: 261678882}
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -187,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90595e4de767c40b4ae9c02fe355c0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpState: {fileID: 261678882}
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -198,6 +201,33 @@ MonoBehaviour:
   acceleration: 50
   deacceleration: 50
   maxSpeed: 6
+--- !u!114 &261678882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261678878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a85128bc64f04f54a6bb8e11ba0cf70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpState: {fileID: 0}
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  movementData: {fileID: 0}
+  IdleState: {fileID: 261678880}
+  acceleration: 50
+  deacceleration: 50
+  maxSpeed: 6
+  jumpForce: 12
+  lowJumpMultiplier: 2
+  FallState: {fileID: 261678880}
 --- !u!1 &316150383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,6 +2256,7 @@ MonoBehaviour:
   rigidBody2D: {fileID: 0}
   agentInput: {fileID: 0}
   animationManager: {fileID: 0}
+  groundDetector: {fileID: 0}
   agentRenderer: {fileID: 0}
   currentState: {fileID: 0}
   previousState: {fileID: 0}

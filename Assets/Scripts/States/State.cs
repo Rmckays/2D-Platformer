@@ -5,6 +5,7 @@ namespace States
 {
     public abstract class State : MonoBehaviour
     {
+        [SerializeField] protected State JumpState;
         protected Agent agent;
 
         public UnityEvent OnEnter, OnExit;
@@ -38,6 +39,15 @@ namespace States
 
         protected virtual void HandleJumpPressed()
         {
+            TestJumpTransition();
+        }
+
+        private void TestJumpTransition()
+        {
+            if (agent.groundDetector.isGrounded)
+            {
+                agent.TransitionToState(JumpState);
+            }
         }
 
         protected virtual void HandleAttack()
